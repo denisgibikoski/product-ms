@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> , ProductRepositoryInter{
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
-
+    List<Product> findAllByNameOrDescriptionOrPriceGreaterThanEqualOrPriceLessThanEqual(String q, String q1, Double min_price, Double max_price);
 }

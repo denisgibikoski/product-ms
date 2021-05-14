@@ -23,7 +23,7 @@ public class ProductController {
     @PostMapping
     @Transactional
     public ResponseEntity<?> postProduct(@Valid @RequestBody Product product) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.saveProduct(product));
+        return ResponseEntity.ok(this.service.saveProduct(product));
     }
 
     @PutMapping("/{id}")
@@ -34,7 +34,7 @@ public class ProductController {
             return ResponseEntity.ok(productDB);
         } else {
             ErroRetorno erro = new ErroRetorno(HttpStatus.BAD_REQUEST.value(), "requisição inválida");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+            return ResponseEntity.badRequest().body(erro);
         }
     }
 
@@ -54,12 +54,8 @@ public class ProductController {
         return ResponseEntity.ok(this.service.getProductAll());
     }
     @GetMapping("/search")
-    public ResponseEntity<?> getProductsSearch(@RequestParam Optional<String> q ,@RequestParam Optional<String> min_price,@RequestParam Optional<String> max_price ) {
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(this.service.getProductBySearch(q, min_price, max_price));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public ResponseEntity<?> getProductsSearch(@RequestParam(required = false) String q ,@RequestParam(required = false) Double min_price,@RequestParam(required = false) Double max_price ) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.service.getProductBySearch(q, min_price, max_price));
     }
     @DeleteMapping("/{id}")
     @Transactional

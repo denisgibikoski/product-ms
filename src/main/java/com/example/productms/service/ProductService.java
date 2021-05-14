@@ -42,11 +42,17 @@ public class  ProductService {
        repository.deleteById(Long.valueOf(id));
     }
 
-    public List<Product> getProductBySearch(Optional<String> q, Optional<String> min_price, Optional<String> max_price) {
-        List<Product> products = new ArrayList<>();
-
-        products = repository.getProductBySearch(q.get(),min_price.get(),max_price.get());
-
+    public List<Product> getProductBySearch(String q, Double min_price,Double max_price)  {
+        String q1 = q ;
+        if(min_price == null ){
+            min_price = new Double(0.0);
+        }
+        if(max_price == null ){
+            max_price = new Double(0.0);
+        }
+        List<Product>  products = repository.findAllByNameOrDescriptionOrPriceGreaterThanEqualOrPriceLessThanEqual(q,q1,min_price,max_price);
         return products;
     }
+
+
 }
