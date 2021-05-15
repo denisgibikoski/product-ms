@@ -20,6 +20,7 @@ Para realizar a requisição para cadastrar Produto devera emitir um evento do m
   }
 
 Para realizar a requisição para Atualizar Produto deverá emitir um evento do método Put nesta URI http://localhost:9999/products/{id} contendo no body um Objeto JSON contendo a sugestão de envio:
+
   {
     "name": "Sapato",
     "description": "Casual",
@@ -40,11 +41,17 @@ Para realizar a consulta Produtos com parametros pelo name ,description ou price
     max_price	                  deverá bater o valor "<=" contra o campo price
     
     Exemplos 
+    
   GET  http://localhost:9999/products/search?min_price=150.50&max_price=50&q=tenis
-   GET  http://localhost:9999/products/search?q=tenis
-    GET  http://localhost:9999/products/search?min_price=150.50&max_price=50
-     GET  http://localhost:9999/products/search?min_price=150.50&q=tenis
-      GET  http://localhost:9999/products/search?max_price=50&q=tenis
   
+   GET  http://localhost:9999/products/search?q=tenis
+   
+    GET  http://localhost:9999/products/search?min_price=150.50&max_price=50
+    
+     GET  http://localhost:9999/products/search?min_price=150.50&q=tenis
+     
+      GET  http://localhost:9999/products/search?max_price=50&q=tenis
+      
+      
 Para realizar remoção Produto deverá emitir um evento do método Delete nesta URIhttp://localhost:9999/products/{id} deverá ser passado o id por parâmetro da uri como o exemplo e sem conteúdo no body.
 
